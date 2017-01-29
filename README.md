@@ -47,3 +47,7 @@ Click Let me in...
 In the dashboard, click Admin Menu -> Add from sidebar. 
 Add a menu item you wish to have in sidebar. Give name, url, and class for font awesome icon you want to display with the menu. 
 Note: Only main menus can have font awesome icon, sub menus can't
+
+=============================================
+
+The Template used in this integration is flamming-red from Elephant Themes. The compressed folder is also listed in the files. You can download it and use it for consulting various classes of CSS and other pages. 
