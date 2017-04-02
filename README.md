@@ -21,12 +21,15 @@ Create a database admin and import the database file admin.sql into that databas
 Open the project in your IDE and go to application->config->database.php
 
 Relace the following lines (probably line # 93-96)
+<ul>
+<li>$db['development']['hostname'] = 'localhost';</li>
 
-$db['development']['hostname'] = 'localhost';
-$db['development']['username'] = 'root';
-$db['development']['password'] = '';
-$db['development']['database'] = 'pm';
+<li>$db['development']['username'] = 'root';</li>
 
+<li>$db['development']['password'] = '';</li>
+
+<li>$db['development']['database'] = 'pm';</li>
+</ul>
 as per your machine settings. Replace database name, username and password. Hostname is likely to be localhost on your machine as well. 
 
 ===========================================
