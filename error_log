@@ -1,0 +1,13 @@
+[05-Dec-2016 23:38:30 America/Chicago] PHP Fatal error:  Call to undefined method CI_DB_mysql_result::result_aray() in /home1/smartbaba/public_html/project/application/models/admin_model.php on line 37
+[05-Dec-2016 23:38:34 America/Chicago] PHP Fatal error:  Call to undefined method CI_DB_mysql_result::result_aray() in /home1/smartbaba/public_html/project/application/models/admin_model.php on line 37
+[05-Dec-2016 23:38:46 America/Chicago] PHP Fatal error:  Call to undefined method CI_DB_mysql_result::result_aray() in /home1/smartbaba/public_html/project/application/models/admin_model.php on line 37
+[05-Dec-2016 23:40:07 America/Chicago] PHP Fatal error:  Call to undefined method CI_DB_mysql_result::result_aray() in /home1/smartbaba/public_html/project/application/models/admin_model.php on line 37
+[05-Dec-2016 23:40:11 America/Chicago] PHP Fatal error:  Call to undefined method CI_DB_mysql_result::result_aray() in /home1/smartbaba/public_html/project/application/models/admin_model.php on line 37
+[05-Dec-2016 23:47:06 America/Chicago] PHP Fatal error:  Call to undefined method CI_DB_mysql_result::result_aray() in /home1/smartbaba/public_html/project/application/models/client_model.php on line 33
+[11-Dec-2016 05:00:02 America/Chicago] PHP Fatal error:  Class 'PHPMailer' not found in /home1/smartbaba/public_html/project/application/controllers/client.php on line 470
+[11-Dec-2016 05:00:58 America/Chicago] PHP Fatal error:  Class 'PHPMailer' not found in /home1/smartbaba/public_html/project/application/controllers/client.php on line 470
+[11-Dec-2016 05:02:02 America/Chicago] PHP Fatal error:  Class 'PHPMailer' not found in /home1/smartbaba/public_html/project/application/controllers/client.php on line 470
+[12-Dec-2016 23:14:37 America/Chicago] PHP Fatal error:  Class 'PHPMailer' not found in /home1/smartbaba/public_html/project/application/controllers/client.php on line 470
+[12-Dec-2016 23:18:09 America/Chicago] PHP Fatal error:  Class 'PHPMailer' not found in /home1/smartbaba/public_html/project/application/controllers/client.php on line 470
+[12-Dec-2016 23:43:40 America/Chicago] PHP Fatal error:  Class 'PHPMailer' not found in /home1/smartbaba/public_html/project/application/controllers/client.php on line 471
+[13-Dec-2016 00:04:15 America/Chicago] PHP Fatal error:  Class 'PHPMailer' not found in /home1/smartbaba/public_html/project/application/controllers/client.php on line 472

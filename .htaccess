@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
+
+RewriteCond %{HTTP_HOST} ^project\.smartbaba\.ae$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.project\.smartbaba\.ae$
+RewriteRule ^/?$ "https\:\/\/duperty\.com\/project" [R=301,L]
+
