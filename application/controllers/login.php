@@ -17,7 +17,7 @@ class Login extends CI_Controller {
     {
         if(!$this->isLoggedIn())
         {
-            $data['title']='SmartBABA ERP';
+            $data['title']='AdminPanel';
             if($_POST)
             {
                 $config=array(

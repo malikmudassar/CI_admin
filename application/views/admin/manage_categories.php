@@ -11,8 +11,8 @@
                                     <th>Sr. #</th>
                                     <th>Name</th>
                                     <th>Parent</th>
-                                    <th>Class</th>
-                                    <th>URL</th>
+                                    <th></th>
+                                    <th></th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -26,11 +26,12 @@
                                             <span class="truncate"><?php echo $menu_items[$i]['name']?></span>
                                         </td>
                                         <td><?php echo $menu_items[$i]['parent']?></td>
-                                        <td><?php echo $menu_items[$i]['class']?></td>
-                                        <td><?php echo $menu_items[$i]['url']?></td>
+                                        <td></td>
+                                        <td></td>
                                         <td>
-                                            <a href="<?php echo base_url().'admin/edit_admin_menu/'.$menu_items[$i]['id'];?>" class="btn btn-default"><i class="icon icon-pencil"></i></a>
+                                            <a href="<?php echo base_url().'admin/edit_category/'.$menu_items[$i]['id'];?>" class="btn btn-default"><i class="icon icon-pencil"></i></a>
                                             <button class="btn btn-danger" onclick="validate(this)" value="<?php echo $menu_items[$i]['id']?>"><i class="icon icon-times"></i></button>
+                                            <a href="<?php echo base_url().'admin/category_feature/'.$menu_items[$i]['id'];?>" title="Category Features" class="btn btn-info"><i class="icon icon-server"></i></a>
                                         </td>
                                     </tr>
                                 <?php }?>
@@ -52,15 +53,15 @@
 
         swal({
                 title: "Are you sure?",
-                text: "You want to delete this Department!",
+                text: "You want to delete this Category!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, Delete it!",
                 closeOnConfirm: false }, function()
             {
-                swal("Deleted!", "Department has been Deleted.", "success");
-                $(location).attr('href','<?php echo base_url()?>admin/del_admin_menu/'+id);
+                swal("Deleted!", "Category has been Deleted.", "success");
+                $(location).attr('href','<?php echo base_url()?>admin/del_category/'+id);
             }
         );
     }

@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].'/admin/';
+$config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].'/CI_admin/index.php/';
 
 /*
 |--------------------------------------------------------------------------

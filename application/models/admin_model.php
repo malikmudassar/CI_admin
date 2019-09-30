@@ -58,7 +58,7 @@ class Admin_model extends CI_Model {
     }
     public function getMenuItems()
     {
-        $st=$this->db->select('*')->from('admin_menu')->where('parent',0)->get()->result_array();
+        $st=$this->db->select('*')->from('admin_menu')->where('parent',0)->order_by('id','asc')->get()->result_array();
         if(count($st)>0)
         {
             for($i=0;$i<count($st);$i++)
@@ -101,6 +101,127 @@ class Admin_model extends CI_Model {
         return $st[0];
     }
 
+    /////////////////////////////////////
+
+    public function addSingleItem($table, $data)
+    {
+        $item=array(
+            'name'=>$data['name']
+        );
+
+        $this->db->insert($table,$item);
+    }
+
+    public function delSingleItem($table, $id)
+    {
+        $this->db->query('DELETE from '.$table.' where id='.$id);
+    }
+
+    public function updateSingleItem($table, $data, $id)
+    {
+        $item=array(
+            'name'=>$data['name']
+        );
+
+        $this->db->WHERE('id',$id)->update($table,$item);
+    }
+
+    public function getSingleItem($table, $id)
+    {
+        $st=$this->db->select('*')->from($table)->WHERE('id',$id)->get()->result_array();
+        return $st[0];
+    }
+    ///////////////////////////////
+    public function getCatParents()
+    {
+        return $this->db->select('*')->from('categories')->where('parent',0)->get()->result_array();
+    }
+    public function addCatItem($data)
+    {
+        $item=array(
+            'parent'=>$data['parent'],
+            'name'=>$data['name']
+        );
+
+        $this->db->insert('categories',$item);
+    }
+    public function updateCatItem($data,$menuId)
+    {
+        $item=array(
+            'parent'=>$data['parent'],
+            'name'=>$data['name']
+        );
+
+        $this->db->WHERE('id',$menuId)->update('categories',$item);
+    }
+    public function getCatItems()
+    {
+        $st=$this->db->select('*')->from('categories')->where('parent',0)->order_by('id','asc')->get()->result_array();
+        if(count($st)>0)
+        {
+            for($i=0;$i<count($st);$i++)
+            {
+                $st[$i]['child']=$this->db->select('*')->from('categories')->where('parent',$st[$i]['id'])->get()->result_array();
+            }
+        }
+        else
+        {
+            return false;
+        }
+
+        return $st;
+    }
+    public function getAllCatItems()
+    {
+        return $this->db->query('SELECT categories.*, a.name as parent from categories left join categories a on a.id=categories.parent')->result_array();
+    }
+    public function getCatItemDetail($menuId)
+    {
+        $st=$this->db->select('*')->from('categories')->WHERE('id',$menuId)->get()->result_array();
+        return $st[0];
+    }
+    public function delCategory($id)
+    {
+        $this->db->query('DELETE from categories WHERE id='.$id);
+    }
+
+    // Insert or Update Category Features
+    public function insertorUpdateCatFeatures($catId, $data)
+    {
+        // print_r($data);exit;
+        $item=array(
+            'category_id'=> $catId,
+            'features'  =>  implode(',',$data['features'])
+        );
+
+        $this->db->query('DELETE from category_features where category_id='.$catId);
+        $this->db->insert('category_features', $item);
+        return true;
+    }
+
+    public function getCatFeatures($catId)
+    {
+        $st=$this->db->select('*')->from('category_features')->where('category_id', $catId)
+        ->get()->result_array();
+        return $st[0]['features'];
+    }
+
+    public function addSupplier($data)
+    {
+        $this->db->insert('suppliers', $data);
+        return true;
+    }
+
+    public function delSupplier($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('suppliers');
+    }
+
+    public function getAllSuppliers()
+    {
+        return $this->db->query('SELECT suppliers.id,suppliers.name, suppliers.code, categories.name as category, suppliers.phone from suppliers inner join categories on categories.id=suppliers.category_id ')->result_array();
+    }
 
 
 }

@@ -64,14 +64,14 @@
  * By default development will show errors but testing and live will hide them.
  */
 
-
+define('BASE_URL','http://'.$_SERVER['SERVER_NAME'].'/CI_admin/');
 switch(dirname(__FILE__))
 {
     case '/home1/smartbaba/public_html/project':
         define('ENVIRONMENT','production');
     break;
 
-    case 'C:\wamp64\www\admin':
+    case '/var/www/html/CI_admin':
         define('ENVIRONMENT','development');
     break;
 }

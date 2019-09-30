@@ -10,9 +10,9 @@
                                 <tr>
                                     <th>Sr. #</th>
                                     <th>Name</th>
-                                    <th>Parent</th>
-                                    <th>Class</th>
-                                    <th>URL</th>
+                                    <th>Code</th>
+                                    <th>Category</th>
+                                    <th>Phone</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -25,12 +25,13 @@
                                         <td class="maw-320">
                                             <span class="truncate"><?php echo $menu_items[$i]['name']?></span>
                                         </td>
-                                        <td><?php echo $menu_items[$i]['parent']?></td>
-                                        <td><?php echo $menu_items[$i]['class']?></td>
-                                        <td><?php echo $menu_items[$i]['url']?></td>
+                                        <td><?php echo $menu_items[$i]['code']?></td>
+                                        <td><?php echo $menu_items[$i]['category']?></td>
+                                        <td><?php echo $menu_items[$i]['phone']?></td>
                                         <td>
-                                            <a href="<?php echo base_url().'admin/edit_admin_menu/'.$menu_items[$i]['id'];?>" class="btn btn-default"><i class="icon icon-pencil"></i></a>
+                                            <a href="<?php echo base_url().'admin/edit_supplier/'.$menu_items[$i]['id'];?>" class="btn btn-default"><i class="icon icon-pencil"></i></a>
                                             <button class="btn btn-danger" onclick="validate(this)" value="<?php echo $menu_items[$i]['id']?>"><i class="icon icon-times"></i></button>
+                                            
                                         </td>
                                     </tr>
                                 <?php }?>
@@ -52,15 +53,15 @@
 
         swal({
                 title: "Are you sure?",
-                text: "You want to delete this Department!",
+                text: "You want to delete this Supplier!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, Delete it!",
                 closeOnConfirm: false }, function()
             {
-                swal("Deleted!", "Department has been Deleted.", "success");
-                $(location).attr('href','<?php echo base_url()?>admin/del_admin_menu/'+id);
+                swal("Deleted!", "Supplier has been Deleted.", "success");
+                $(location).attr('href','<?php echo base_url()?>admin/del_supplier/'+id);
             }
         );
     }

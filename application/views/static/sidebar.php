@@ -64,39 +64,7 @@
                                 <li><a href="<?php echo base_url().'admin/manage_admin_menu'?>" >Manage</a></li>
                             </ul>
                         </li>
-                        <li class="sidenav-item has-subnav">
-                            <a href="#" aria-haspopup="true">
-                                <span class="sidenav-icon icon icon-lock"></span>
-                                <span class="sidenav-label">Team Nav</span>
-                            </a>
-                            <ul class="sidenav-subnav collapse">
-                                <li class="sidenav-subheading">Team Navigation</li>
-                                <li><a href="<?php echo base_url().'admin/add_team_menu'?>" >Add Menu</a></li>
-                                <li><a href="<?php echo base_url().'admin/manage_team_menu'?>" >Manage</a></li>
-                            </ul>
-                        </li>
-                        <li class="sidenav-item has-subnav">
-                            <a href="#" aria-haspopup="true">
-                                <span class="sidenav-icon icon icon-lock"></span>
-                                <span class="sidenav-label">Client Nav</span>
-                            </a>
-                            <ul class="sidenav-subnav collapse">
-                                <li class="sidenav-subheading">Client Navigation</li>
-                                <li><a href="<?php echo base_url().'admin/add_client_menu'?>" >Add Menu</a></li>
-                                <li><a href="<?php echo base_url().'admin/manage_client_menu'?>" >Manage</a></li>
-                            </ul>
-                        </li>
-                        <li class="sidenav-item has-subnav">
-                            <a href="#" aria-haspopup="true">
-                                <span class="sidenav-icon icon icon-lock"></span>
-                                <span class="sidenav-label">Managers Nav</span>
-                            </a>
-                            <ul class="sidenav-subnav collapse">
-                                <li class="sidenav-subheading">Client Navigation</li>
-                                <li><a href="<?php echo base_url().'admin/add_manager_menu'?>" >Add Menu</a></li>
-                                <li><a href="<?php echo base_url().'admin/manage_manager_menu'?>" >Manage</a></li>
-                            </ul>
-                        </li>
+                        
                         <?php }?>
                     </ul>
                 </nav>

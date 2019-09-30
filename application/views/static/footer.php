@@ -1,15 +1,15 @@
 <div class="layout-footer">
     <div class="layout-footer-body">
         <small class="version">Version 1.0.0</small>
-        <small class="copyright">2016 &copy; ERP By <a href="http://smartbaba.ae/">SmartBABA</a></small>
+        <small class="copyright">2019 &copy; By <a href="#">Khani</a></small>
     </div>
 </div>
 </div>
 
-<script src="<?php echo base_url()?>assets/js/vendor.min.js"></script>
-<script src="<?php echo base_url()?>assets/js/elephant.min.js"></script>
-<script src="<?php echo base_url()?>assets/js/application.min.js"></script>
-<script src="<?php echo base_url()?>assets/js/demo.min.js"></script>
+<script src="<?php echo BASE_URL?>assets/js/vendor.min.js"></script>
+<script src="<?php echo BASE_URL?>assets/js/elephant.min.js"></script>
+<script src="<?php echo BASE_URL?>assets/js/application.min.js"></script>
+<script src="<?php echo BASE_URL?>assets/js/demo.min.js"></script>
 
 </body>
 
