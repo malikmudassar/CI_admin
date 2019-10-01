@@ -258,5 +258,29 @@ class Admin_model extends CI_Model {
         return $st[0]['permissions'];
     }
 
+    // Add Product
+
+    public function addProduct($data)
+    {
+        $this->db->insert('product', $data);
+        return $this->db->insert_id();
+    }
+
+    public function getFeaturesByProductId($id)
+    {
+        $st=$this->db->select('*')->from('product')->where('id',$id)->get()->result_array();
+        $catId=$st[0]['category'];
+        $features=$this->getCatFeatures($catId);
+        $list=array();
+        $features_list=explode(',',$features);
+        for($i=0;$i<count($features_list);$i++)
+        {
+            $st=$this->db->select('*')->from('features')->where('id', $features_list[$i])
+            ->get()->result_array();
+            $list[$i]=$st[0];
+        }
+        return $list;
+    }
+
 
 }

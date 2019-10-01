@@ -1591,16 +1591,9 @@ class Admin extends CI_Controller {
                 }
                 else
                 {
-                    $this->admin_model->addSupplier($_POST);
-                    $data['success']='Congratulations! Supplier Added Successfully';
-                    $data['menu']=$this->admin_model->getMenuItems();
-                    $data['categories']=$this->admin_model->getCatParents();
-                    $data['title']='Admin Panel';
-                    $this->load->view('static/head',$data);
-                    $this->load->view('static/header');
-                    $this->load->view('static/sidebar');
-                    $this->load->view('admin/add_product');
-                    $this->load->view('static/footer');
+                    $id=$this->admin_model->addProduct($_POST);
+                    $this->session->set_flashdata('success', 'Congratulations! Product Added Successfully. Please add features');
+                    redirect(base_url().'admin/add_product_features/'.$id);
                 }
             }
             else
@@ -1611,6 +1604,46 @@ class Admin extends CI_Controller {
                 $this->load->view('static/header');
                 $this->load->view('static/sidebar');
                 $this->load->view('admin/add_product');
+                $this->load->view('static/footer');
+            }
+        }
+        else
+        {
+            redirect(base_url().'');
+        }
+
+    }
+    public function add_product_features()
+    {
+        if($this->isLoggedIn())
+        {
+            $id=$this->uri->segment(3);
+            $data['menu']=$this->admin_model->getMenuItems();
+            $data['brands']=$this->admin_model->getAll('brands');
+            $data['shapes']=$this->admin_model->getAll('shapes');
+            $data['surfaces']=$this->admin_model->getAll('surfaces');
+            $data['patterns']=$this->admin_model->getAll('patterns');
+            $data['cat_features']=$this->admin_model->getFeaturesByProductId($id);
+            // echo '<pre>';print_r($data);exit;
+            if($_POST)
+            {
+                // echo '<pre>';print_r($_POST);exit;
+                $id=$this->admin_model->addProduct($_POST);
+                $data['title']='Admin Panel';
+                $this->load->view('static/head',$data);
+                $this->load->view('static/header');
+                $this->load->view('static/sidebar');
+                $this->load->view('admin/add_product_features');
+                $this->load->view('static/footer');
+            }
+            else
+            {
+                // echo '<pre>';print_r($data);exit;
+                $data['title']='Admin Panel';
+                $this->load->view('static/head',$data);
+                $this->load->view('static/header');
+                $this->load->view('static/sidebar');
+                $this->load->view('admin/add_product_features');
                 $this->load->view('static/footer');
             }
         }

@@ -20,7 +20,7 @@
                         </div>
                         <div class="form-group">
                             <label for="username" class="control-label">Category</label>
-                            <select class="form-control" name="category_id">
+                            <select class="form-control" name="category">
                                 <?php
                                 if(count($categories)>0) {
                                     for($i=0;$i<count($categories);$i++)
@@ -29,6 +29,12 @@
                                     <?php
                                     }}
                                 ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="control-label">Sub Category</label>
+                            <select class="form-control" name="sub_category">
+                                
                             </select>
                         </div>
                         <div class="form-group">
@@ -41,7 +47,7 @@
                         </div>
                         <div class="form-group">
                             <label for="username" class="control-label">Currency</label>
-                            <select class="form-control" name="currency">
+                            <select class="form-control" name="currency_id">
                                 <?php
                                 if(count($currency)>0) {
                                     for($i=0;$i<count($currency);$i++)
@@ -54,7 +60,7 @@
                         </div>
                         <div class="form-group">
                             <label for="username" class="control-label">Supplier</label>
-                            <select class="form-control" name="supplier">
+                            <select class="form-control" name="supplier_id">
                                 <?php
                                 if(count($supplier)>0) {
                                     for($i=0;$i<count($supplier);$i++)
@@ -66,7 +72,14 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-primary btn-block" type="submit">Add Supplier</button>
+                            <label for="username" class="control-label">Status</label>
+                            <select class="form-control" name="status">
+                                <option value="Active">Active</option>
+                                <option value="In-active">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block" type="submit">Proceed</button>
                         </div>
 
                     </form>
