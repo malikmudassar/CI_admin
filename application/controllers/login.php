@@ -60,7 +60,10 @@ class Login extends CI_Controller {
                         {
                             $user['type']='manager';
                         }
+                        $permissions=$this->admin_model->getUserPermissions($user['id']);
+                        $user['permissions']=$permissions;
                         $this->session->set_userdata($user);
+                        
                         redirect(base_url().$user['type']);
                     }
                     else

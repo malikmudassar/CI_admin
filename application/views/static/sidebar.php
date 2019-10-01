@@ -1,6 +1,6 @@
 <div class="layout-main" >
     <div class="layout-sidebar" >
-        <div class="layout-sidebar-backdrop" <!--style="background-color: #253449; color;#fff; "-->></div>
+        <div class="layout-sidebar-backdrop" <!--style="background-color: #253449; color;#fff; "--!></div>
         <div class="layout-sidebar-body" >
             <div class="custom-scrollbar">
                 <nav id="sidenav" class="sidenav-collapse collapse">
@@ -21,6 +21,7 @@
                         {
                             for($i=0;$i<count($menu);$i++)
                             {
+                                if(in_array($menu[$i]['id'], explode(',', $this->session->userdata['permissions']))){
                                 ?>
                                 <li class="sidenav-item <?php if(!empty($menu[$i]['child'])){ echo 'has-subnav';}?>">
                                     <a href="#" aria-haspopup="true">
@@ -35,10 +36,12 @@
                                             <?php
                                             for($j=0;$j<count($menu[$i]['child']);$j++)
                                             {
+                                                if(in_array($menu[$i]['child'][$j]['id'], explode(',', $this->session->userdata['permissions']))){
                                                 ?>
                                                 <li><a href="<?php echo base_url().$menu[$i]['child'][$j]['url']?>"><?php echo $menu[$i]['child'][$j]['name']?></a></li>
 
                                             <?php
+                                                }
                                             }
                                             ?>
                                         </ul>
@@ -47,7 +50,8 @@
                                     ?>
 
                                 </li>
-                            <?php
+                                <?php
+                                }
                             }
                         }
                         ?>

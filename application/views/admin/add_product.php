@@ -46,7 +46,7 @@
                                 if(count($currency)>0) {
                                     for($i=0;$i<count($currency);$i++)
                                     {?>
-                                        <option value="<?php echo $currency[$i]['id']?>"><?php echo $currency[$i]['name']?></option>
+                                        <option value="<?php echo $currency[$i]['id']?>"><?php echo $currency[$i]['code']?></option>
                                     <?php
                                     }}
                                 ?>

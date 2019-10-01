@@ -25,6 +25,21 @@ class Admin_model extends CI_Model {
             return false;
         }
     }
+    public function addUser($data)
+    {
+        $item=array(
+            'name'  => $data['name'],
+            'email' =>  $data['email'],
+            'password'  => md5(sha1($data['password'])),
+            'role'  => 1
+        );
+        $this->db->insert('users', $item);
+    }
+
+    public function updateUser($id, $data)
+    {
+        $this->db->where('id', $id)->update('users'. $data);
+    }
     ///////////////////////////////////////
     ///                                 ///
     ///     Admin Menu Section Starts   ///
@@ -221,6 +236,26 @@ class Admin_model extends CI_Model {
     public function getAllSuppliers()
     {
         return $this->db->query('SELECT suppliers.id,suppliers.name, suppliers.code, categories.name as category, suppliers.phone from suppliers inner join categories on categories.id=suppliers.category_id ')->result_array();
+    }
+
+    public function insertorUpdatePermissions($id, $data)
+    {
+        // print_r($data);exit;
+        $item=array(
+            'user_id'=> $id,
+            'permissions'  =>  implode(',',$data['permissions'])
+        );
+
+        $this->db->query('DELETE from user_permissions where user_id='.$id);
+        $this->db->insert('user_permissions', $item);
+        return true;
+    }
+
+    public function getUserPermissions($id)
+    {
+        $st=$this->db->select('*')->from('user_permissions')->where('user_id',$id)->get()
+        ->result_array();
+        return $st[0]['permissions'];
     }
 
 
