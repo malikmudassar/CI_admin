@@ -266,6 +266,28 @@ class Admin_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    public function addProductFeatures($id, $data)
+    {
+        foreach($data['cat'] as $key => $value)
+        {
+            $item=array(
+                'product_id'    => $id,
+                'feature_id'    => $key,
+                'value'         => $value
+            );
+            $this->db->insert('prod_cat_feature_values', $item);
+        }
+        $item=array(
+            'product_id'    => $id,
+            'brand_id'      => $data['brand_id'],
+            'shape_id'      => $data['shape_id'],
+            'surface_id'      => $data['surface_id'],
+            'pattern_id'      => $data['pattern_id'],
+        );
+        $this->db->insert('product_features', $item);
+       return true;
+    }
+
     public function getFeaturesByProductId($id)
     {
         $st=$this->db->select('*')->from('product')->where('id',$id)->get()->result_array();
@@ -280,6 +302,14 @@ class Admin_model extends CI_Model {
             $list[$i]=$st[0];
         }
         return $list;
+    }
+
+    public function getProducts()
+    {
+        $st=$this->db->query('SELECT product.*, categories.name as category_name from product
+        inner join categories on categories.id=product.category
+        ')->result_array();
+        return $st;
     }
 
 

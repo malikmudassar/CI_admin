@@ -1627,14 +1627,9 @@ class Admin extends CI_Controller {
             // echo '<pre>';print_r($data);exit;
             if($_POST)
             {
-                // echo '<pre>';print_r($_POST);exit;
-                $id=$this->admin_model->addProduct($_POST);
-                $data['title']='Admin Panel';
-                $this->load->view('static/head',$data);
-                $this->load->view('static/header');
-                $this->load->view('static/sidebar');
-                $this->load->view('admin/add_product_features');
-                $this->load->view('static/footer');
+                $id=$this->admin_model->addProductFeatures($id, $_POST);
+                $this->session->set_flashdata('success', 'Congratulations! Product Added Successfully. Please add features');
+                redirect(base_url().'admin/add_product_images/'.$id);
             }
             else
             {
@@ -1653,6 +1648,8 @@ class Admin extends CI_Controller {
         }
 
     }
+
+    
     public function edit_product()
     {
         if($this->isLoggedIn())
@@ -1732,7 +1729,7 @@ class Admin extends CI_Controller {
         if($this->isLoggedIn())
         {
             $data['menu']=$this->admin_model->getMenuItems();
-            $data['menu_items']=$this->admin_model->getAllProducts();
+            $data['menu_items']=$this->admin_model->getProducts();
             //echo '<pre>';print_r($data);exit;
             $data['title']='Admin Panel';
             $this->load->view('static/head',$data);
