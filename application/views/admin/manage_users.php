@@ -13,6 +13,7 @@
                                     <th>Email</th>
                                     <th>Role</th>
                                     <th>Permissions</th>
+                                    <th>Language</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -29,6 +30,9 @@
                                         <td>Admin</td>
                                         <td>
                                         <a href="<?php echo base_url().'admin/user_permissions/'.$menu_items[$i]['id'];?>" title="Assign Permissions" class="btn btn-default"><i class="icon icon-key"></i></a>
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo base_url().'admin/assign_language/'.$menu_items[$i]['id'];?>" title="Assign Language" class="btn btn-info"><i class="icon icon-phone"></i></a>
                                         </td>
                                         <td>
                                             <a href="<?php echo base_url().'admin/edit_category/'.$menu_items[$i]['id'];?>" class="btn btn-default"><i class="icon icon-pencil"></i></a>

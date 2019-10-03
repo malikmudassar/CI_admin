@@ -1627,7 +1627,7 @@ class Admin extends CI_Controller {
             // echo '<pre>';print_r($data);exit;
             if($_POST)
             {
-                $id=$this->admin_model->addProductFeatures($id, $_POST);
+                $this->admin_model->addProductFeatures($id, $_POST);
                 $this->session->set_flashdata('success', 'Congratulations! Product Added Successfully. Please add features');
                 redirect(base_url().'admin/add_product_images/'.$id);
             }
@@ -2124,8 +2124,200 @@ class Admin extends CI_Controller {
         }
         
     }
+
+    public function assign_language()
+    {
+        $id=$this->uri->segment(3);
+        if($this->isLoggedIn())
+        {
+            if($_POST)
+            {
+                //echo '<pre>';print_r($data);exit;
+                $this->admin_model->assignLanguage($id, $_POST);
+                $data['success']='Language assigned successfully.';
+                $data['menu']=$this->admin_model->getMenuItems();
+                $data['languages']=$this->admin_model->getAll('languages');
+                $data['user']=$this->admin_model->getAllById('users', $id);
+                $data['title']='Admin Panel';
+                $this->load->view('static/head',$data);
+                $this->load->view('static/header');
+                $this->load->view('static/sidebar');
+                $this->load->view('admin/assign_language');
+                $this->load->view('static/footer');
+            }
+            else
+            {
+                $data['menu']=$this->admin_model->getMenuItems();
+                $data['languages']=$this->admin_model->getAll('languages');
+                $data['user']=$this->admin_model->getAllById('users', $id);
+                $data['title']='Admin Panel';
+                $this->load->view('static/head',$data);
+                $this->load->view('static/header');
+                $this->load->view('static/sidebar');
+                $this->load->view('admin/assign_language');
+                $this->load->view('static/footer');
+            }
+            
+        }
+        else
+        {
+            redirect(base_url().'');
+        }
+    }
     // Users section ends
 
+    // Language Section Starts
+
+    public function add_language()
+    {
+        if($this->isLoggedIn())
+        {
+            $data['parents']=$this->admin_model->getMenuParents();
+            $data['menu']=$this->admin_model->getMenuItems();
+            //echo '<pre>';print_r($data);exit;
+            if($_POST)
+            {
+                $config=array(
+                    array(
+                        'field' =>  'name',
+                        'label' =>  'Name',
+                        'rules' =>  'trim|required'
+                    )
+                );
+                $this->form_validation->set_rules($config);
+                if($this->form_validation->run()==false)
+                {
+                    $data['errors']=validation_errors();
+                    $data['parents']=$this->admin_model->getMenuParents();
+                    $data['title']='Admin Panel';
+                    $this->load->view('static/head',$data);
+                    $this->load->view('static/header');
+                    $this->load->view('static/sidebar');
+                    $this->load->view('admin/add_single');
+                    $this->load->view('static/footer');
+                }
+                else
+                {
+                    $this->admin_model->addSingleItem('languages',$_POST);
+                    $data['success']='Congratulations! Language Added Successfully';
+                    $data['parents']=$this->admin_model->getMenuParents();
+                    $data['menu']=$this->admin_model->getMenuItems();
+                    $data['title']='Admin Panel';
+                    $this->load->view('static/head',$data);
+                    $this->load->view('static/header');
+                    $this->load->view('static/sidebar');
+                    $this->load->view('admin/add_single');
+                    $this->load->view('static/footer');
+                }
+            }
+            else
+            {
+                $data['parents']=$this->admin_model->getMenuParents();
+                //echo '<pre>';print_r($data);exit;
+                $data['title']='Admin Panel';
+                $this->load->view('static/head',$data);
+                $this->load->view('static/header');
+                $this->load->view('static/sidebar');
+                $this->load->view('admin/add_single');
+                $this->load->view('static/footer');
+            }
+        }
+        else
+        {
+            redirect(base_url().'');
+        }
+
+    }
+    public function edit_language()
+    {
+        if($this->isLoggedIn())
+        {
+            $menuId=$this->uri->segment(3);
+            $data['parents']=$this->admin_model->getMenuParents();
+            $data['menu']=$this->admin_model->getMenuItems();
+            $data['menu_item']=$this->admin_model->getSingleItem('languages',$menuId);
+            //echo '<pre>';print_r($data);exit;
+            if($_POST)
+            {
+                $config=array(
+                    array(
+                        'field' =>  'name',
+                        'label' =>  'Name',
+                        'rules' =>  'trim|required'
+                    )
+                );
+                $this->form_validation->set_rules($config);
+                if($this->form_validation->run()==false)
+                {
+                    $data['errors']=validation_errors();
+                    $data['parents']=$this->admin_model->getMenuParents();
+                    $data['menu_item']=$this->admin_model->getSingleItem('languages',$menuId);
+                    $data['title']='Admin Panel';
+                    $this->load->view('static/head',$data);
+                    $this->load->view('static/header');
+                    $this->load->view('static/sidebar');
+                    $this->load->view('admin/edit_single');
+                    $this->load->view('static/footer');
+                }
+                else
+                {
+                    $this->admin_model->updateSingleItem('languages',$_POST,$menuId);
+                    $data['success']='Congratulations! Language Updated Successfully';
+                    $data['parents']=$this->admin_model->getMenuParents();
+                    $data['menu']=$this->admin_model->getMenuItems();
+                    $data['menu_item']=$this->admin_model->getSingleItem('languages',$menuId);
+                    $data['title']='Admin Panel';
+                    $this->load->view('static/head',$data);
+                    $this->load->view('static/header');
+                    $this->load->view('static/sidebar');
+                    $this->load->view('admin/edit_single');
+                    $this->load->view('static/footer');
+                }
+            }
+            else
+            {
+                $data['parents']=$this->admin_model->getMenuParents();
+                //echo '<pre>';print_r($data);exit;
+                $data['title']='Admin Panel';
+                $this->load->view('static/head',$data);
+                $this->load->view('static/header');
+                $this->load->view('static/sidebar');
+                $this->load->view('admin/edit_single');
+                $this->load->view('static/footer');
+            }
+        }
+        else
+        {
+            redirect(base_url().'');
+        }
+
+    }
+    public function del_language()
+    {
+        $menuId=$this->uri->segment(3);
+        $this->admin_model->delSingleItem('languages',$menuId);
+        redirect(base_url().'admin/manage_languages');
+    }
+    public function manage_languages()
+    {
+        if($this->isLoggedIn())
+        {
+            $data['menu']=$this->admin_model->getMenuItems();
+            $data['menu_items']=$this->admin_model->getAll('languages');
+            $data['title']='Admin Panel';
+            $this->load->view('static/head',$data);
+            $this->load->view('static/header');
+            $this->load->view('static/sidebar');
+            $this->load->view('admin/manage_singles');
+            $this->load->view('static/footer');
+        }
+        else
+        {
+            redirect(base_url().'');
+        }
+    }
+
+    // Language Section Ends
 
     public function isLoggedIn()
     {

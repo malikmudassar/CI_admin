@@ -38,9 +38,12 @@
                 <span class="bar-line bar-line-6 in"></span>
               </span>
                 </button>
+                
                 <ul class="nav navbar-nav navbar-right">
+                
                     <li class="visible-xs-block">
                         <h4 class="navbar-text text-center">Hi, <?php echo $this->session->userdata['name']?></h4>
+                        
                     </li>
                     <li class="hidden-xs hidden-sm">
                         <form class="navbar-search navbar-search-collapsed">
@@ -70,6 +73,7 @@
                     </li>
 
                 </ul>
+                
             </nav>
         </div>
     </div>

@@ -40,6 +40,14 @@ class Admin_model extends CI_Model {
     {
         $this->db->where('id', $id)->update('users'. $data);
     }
+
+    public function assignLanguage($id, $data)
+    {
+        $item=array(
+            'language'=> $data['language']
+        );
+        $this->db->where('id', $id)->update('users', $item);
+    }
     ///////////////////////////////////////
     ///                                 ///
     ///     Admin Menu Section Starts   ///
