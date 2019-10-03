@@ -266,15 +266,22 @@ class Admin_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    public function updateProduct($id,$data)
+    {
+        $this->db->where('id', $id)->update('product', $data);
+        return true;
+    }
+
     public function addProductFeatures($id, $data)
     {
+        $this->db->where('product_id',$id)->delete('prod_cat_feature_values');
         foreach($data['cat'] as $key => $value)
         {
             $item=array(
                 'product_id'    => $id,
                 'feature_id'    => $key,
                 'value'         => $value
-            );
+            );            
             $this->db->insert('prod_cat_feature_values', $item);
         }
         $item=array(
@@ -284,8 +291,38 @@ class Admin_model extends CI_Model {
             'surface_id'      => $data['surface_id'],
             'pattern_id'      => $data['pattern_id'],
         );
+        $this->db->where('product_id', $id)->delete('product_features');
         $this->db->insert('product_features', $item);
        return true;
+    }
+
+    public function getProductFeaturesById($id)
+    {
+        $data=array();
+        $data['cat']=$this->db->select('*')->from('prod_cat_feature_values')
+                        ->where('product_id',$id)->get()->result_array();
+        $data['features']=$this->db->select('*')->from('product_features')
+                        ->where('product_id', $id)->get()->result_array();
+        return $data;
+    }
+
+    public function insertProductImages($id, $data)
+    {
+        for($i=0;$i<count($data);$i++)
+        {
+            $item=array(
+                'product_id'    =>  $id,
+                'file_name'     =>  $data[$i]['file_name'],
+                'uploaded_on'   =>  $data[$i]['uploaded_on']
+            );
+            $this->db->insert('product_images', $item);
+        }
+    }
+
+    public function getProductImages($id)
+    {
+        $st=$this->db->select('*')->from('product_images')->where('product_id', $id)->get()->result_array();
+        return $st;
     }
 
     public function getFeaturesByProductId($id)

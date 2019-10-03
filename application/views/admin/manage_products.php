@@ -29,9 +29,9 @@
                                         <td><?php echo $menu_items[$i]['category_name']?></td>
                                         <td><?php echo $menu_items[$i]['price']?></td>
                                         <td>
-                                            <a href="<?php echo base_url().'admin/edit_supplier/'.$menu_items[$i]['id'];?>" class="btn btn-default"><i class="icon icon-pencil"></i></a>
+                                            <a href="<?php echo base_url().'admin/edit_product/'.$menu_items[$i]['id'];?>" class="btn btn-default"><i class="icon icon-pencil"></i></a>
                                             <a href="<?php echo base_url().'admin/edit_product_features/'.$menu_items[$i]['id'];?>" title="Product Features" class="btn btn-info"><i class="icon icon-server"></i></a>
-                                            <a href="<?php echo base_url().'admin/edit_product_images/'.$menu_items[$i]['id'];?>" title="Product Images" class="btn btn-warning"><i class="icon icon-image"></i></a>
+                                            <a href="<?php echo base_url().'admin/add_product_images/'.$menu_items[$i]['id'];?>" title="Product Images" class="btn btn-warning"><i class="icon icon-image"></i></a>
                                             <button class="btn btn-danger" onclick="validate(this)" value="<?php echo $menu_items[$i]['id']?>"><i class="icon icon-times"></i></button>
                                             
                                         </td>

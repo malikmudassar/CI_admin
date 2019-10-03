@@ -1649,6 +1649,42 @@ class Admin extends CI_Controller {
 
     }
 
+    public function edit_product_features()
+    {
+        if($this->isLoggedIn())
+        {
+            $id=$this->uri->segment(3);
+            $data['menu']=$this->admin_model->getMenuItems();
+            $data['brands']=$this->admin_model->getAll('brands');
+            $data['shapes']=$this->admin_model->getAll('shapes');
+            $data['surfaces']=$this->admin_model->getAll('surfaces');
+            $data['patterns']=$this->admin_model->getAll('patterns');
+            $data['cat_features']=$this->admin_model->getFeaturesByProductId($id);
+            $data['product_features']=$this->admin_model->getProductFeaturesById($id);
+            // echo '<pre>';print_r($data['product_features']);exit;
+            if($_POST)
+            {
+                $id=$this->admin_model->addProductFeatures($id, $_POST);
+                $this->session->set_flashdata('success', 'Congratulations! Product Updated Successfully. Please add features');
+                redirect(base_url().'admin/manage_products');
+            }
+            else
+            {
+                // echo '<pre>';print_r($data);exit;
+                $data['title']='Admin Panel';
+                $this->load->view('static/head',$data);
+                $this->load->view('static/header');
+                $this->load->view('static/sidebar');
+                $this->load->view('admin/edit_product_features');
+                $this->load->view('static/footer');
+            }
+        }
+        else
+        {
+            redirect(base_url().'');
+        }
+
+    }
     
     public function edit_product()
     {
@@ -1656,20 +1692,22 @@ class Admin extends CI_Controller {
         {
             $menuId=$this->uri->segment(3);
             $data['menu']=$this->admin_model->getMenuItems();
-            $data['menu_item']=$this->admin_model->getAllById('suppliers',$menuId);
+            $data['menu_item']=$this->admin_model->getAllById('product',$menuId);
             $data['categories']=$this->admin_model->getCatParents();
+            $data['supplier']=$this->admin_model->getAll('suppliers');
+            $data['currency']=$this->admin_model->getAll('currencies');
             //echo '<pre>';print_r($data);exit;
             if($_POST)
             {
                 $config=array(
                     array(
-                        'field' =>  'parent',
-                        'label' =>  'Parent',
+                        'field' =>  'name',
+                        'label' =>  'Name',
                         'rules' =>  'trim|required'
                     ),
                     array(
-                        'field' =>  'name',
-                        'label' =>  'Name',
+                        'field' =>  'code',
+                        'label' =>  'Code',
                         'rules' =>  'trim|required'
                     )
                 );
@@ -1678,7 +1716,9 @@ class Admin extends CI_Controller {
                 {
                     $data['errors']=validation_errors();
                     $data['categories']=$this->admin_model->getCatParents();
-                    $data['menu_item']=$this->admin_model->getAllById('suppliers',$menuId);
+                    $data['menu_item']=$this->admin_model->getAllById('product',$menuId);
+                    $data['supplier']=$this->admin_model->getAll('suppliers');
+                    $data['currency']=$this->admin_model->getAll('currencies');
                     $data['title']='Admin Panel';
                     $this->load->view('static/head',$data);
                     $this->load->view('static/header');
@@ -1688,11 +1728,13 @@ class Admin extends CI_Controller {
                 }
                 else
                 {
-                    $this->admin_model->updateCatItem($_POST,$menuId);
-                    $data['success']='Congratulations! Supplier Updated Successfully';
-                    $data['menu']=$this->admin_model->getCatItems();
-                    $data['menu_item']=$this->admin_model->getAllById('suppliers',$menuId);
+                    $this->admin_model->updateProduct($menuId,$_POST);
+                    $data['success']='Congratulations! Product Updated Successfully';
+                    $data['menu']=$this->admin_model->getMenuItems();
+                    $data['menu_item']=$this->admin_model->getAllById('product',$menuId);
                     $data['categories']=$this->admin_model->getCatParents();
+                    $data['supplier']=$this->admin_model->getAll('suppliers');
+                    $data['currency']=$this->admin_model->getAll('currencies');
                     $data['title']='Admin Panel';
                     $this->load->view('static/head',$data);
                     $this->load->view('static/header');
@@ -1743,7 +1785,65 @@ class Admin extends CI_Controller {
             redirect(base_url().'');
         }
     }
-    // Suppliers section ends
+
+    public function add_product_images()
+    {
+        $id=$this->uri->segment(3);
+        if($this->isLoggedIn())
+        {
+            if($_POST || $_FILES){
+                $filesCount = count($_FILES['files']['name']);
+                for($i = 0; $i < $filesCount; $i++){
+                    $_FILES['file']['name']     = $_FILES['files']['name'][$i];
+                    $_FILES['file']['type']     = $_FILES['files']['type'][$i];
+                    $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+                    $_FILES['file']['error']     = $_FILES['files']['error'][$i];
+                    $_FILES['file']['size']     = $_FILES['files']['size'][$i];
+                    
+                    // File upload configuration
+                    $uploadPath = 'uploads/files/';
+                    $config['upload_path'] = $uploadPath;
+                    $config['allowed_types'] = 'jpg|jpeg|png|gif';
+                    
+                    // Load and initialize upload library
+                    $this->load->library('upload', $config);
+                    $this->upload->initialize($config);
+                    
+                    // Upload file to server
+                    if($this->upload->do_upload('file')){
+                        // Uploaded file data
+                        $fileData = $this->upload->data();
+                        $uploadData[$i]['file_name'] = $fileData['file_name'];
+                        $uploadData[$i]['uploaded_on'] = date("Y-m-d H:i:s");
+                    }
+                }
+                
+                if(!empty($uploadData)){
+                    // Insert files data into the database
+                    $insert = $this->admin_model->insertProductImages($id, $uploadData);
+                    
+                    // Upload status message
+                    $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
+                    $this->session->set_flashdata('statusMsg',$statusMsg);
+                }
+            }
+            $data['menu']=$this->admin_model->getMenuItems();
+            $data['menu_items']=$this->admin_model->getProducts();
+            $data['productImages']=$this->admin_model->getProductImages($id);
+            //echo '<pre>';print_r($data);exit;
+            $data['title']='Admin Panel';
+            $this->load->view('static/head',$data);
+            $this->load->view('static/header');
+            $this->load->view('static/sidebar');
+            $this->load->view('admin/add_product_images');
+            $this->load->view('static/footer');
+        }
+        else
+        {
+            redirect(base_url().'');
+        }
+    }
+    // Product section ends
 
     // Currency Section Starts
     public function add_currency()
@@ -2025,6 +2125,8 @@ class Admin extends CI_Controller {
         
     }
     // Users section ends
+
+
     public function isLoggedIn()
     {
         if(!empty($this->session->userdata['id'])&& $this->session->userdata['type']=='admin')
