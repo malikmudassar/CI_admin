@@ -10,8 +10,9 @@ class Admin extends CI_Controller {
     function __construct()
     {
         parent::__construct();
+        $language=$this->session->userdata['language'];
         $this->load->model('admin_model');
-        // $this->load->library('My_PHPMailer');
+        $this->lang->load('information',$language);
     }
 
     public function index()

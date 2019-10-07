@@ -29,9 +29,9 @@
                         </div>
                         <div class="col-md-4">
                         <fieldset>
-                            <label>Product Features</label>
+                            <label><?php echo $this->lang->line('Prod_features');?></label>
                             <div class="form-group">
-                                <label class="control-label">Brand</label>
+                                <label class="control-label"><?php echo $this->lang->line('Brand');?></label>
                                 <select class="form-control" name="brand_id">
                                     <?php
                                     if(count($brands)>0) {
@@ -44,7 +44,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Shape</label>
+                                <label class="control-label"><?php echo $this->lang->line('Shape');?></label>
                                 <select class="form-control" name="shape_id">
                                     <?php
                                     if(count($shapes)>0) {
@@ -57,7 +57,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Surface</label>
+                                <label class="control-label"><?php echo $this->lang->line('Surface');?></label>
                                 <select class="form-control" name="surface_id">
                                     <?php
                                     if(count($surfaces)>0) {
@@ -70,7 +70,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Pattern</label>
+                                <label class="control-label"><?php echo $this->lang->line('Pattern');?></label>
                                 <select class="form-control" name="pattern_id">
                                     <?php
                                     if(count($patterns)>0) {

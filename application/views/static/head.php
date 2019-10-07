@@ -16,5 +16,4 @@
     <link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/elephant.min.css">
     <link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/application.min.css">
     <link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/sweetalert.css">
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> 
 </head>

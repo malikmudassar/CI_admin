@@ -16,12 +16,12 @@
                     <form data-toggle="validator" action="" method="post">
                        
                         <div class="form-group">
-                            <label for="username" class="control-label">Name</label>
+                            <label for="username" class="control-label"><?php echo $this->lang->line('Name');?></label>
                             <input id="username" class="form-control" type="text" name="name" data-msg-required="Please enter your item Name." required value="<?php echo $menu_item['name']?>">
                         </div>
                         
                         <div class="form-group">
-                            <button class="btn btn-primary btn-block" type="submit">Update Item</button>
+                            <button class="btn btn-primary btn-block" type="submit">Update</button>
                         </div>
 
                     </form>

@@ -9,11 +9,11 @@
                                 <thead>
                                 <tr>
                                     <th>Sr. #</th>
-                                    <th>Name</th>
+                                    <th><?php echo $this->lang->line('Name');?></th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th>Action</th>
+                                    <th><?php echo $this->lang->line('Action');?></th>
                                 </tr>
                                 </thead>
                                 <tbody>

@@ -3,7 +3,7 @@
     <div class="navbar navbar-default" style="">
         <div class="navbar-header"  >
             <a class="navbar-brand navbar-brand-center" href="<?php echo base_url()?>" style="color:#fff">
-                <strong>Admin Panel</strong>
+                <strong><?php echo $this->lang->line('Admin_Panel');?></strong>
             </a>
             <button class="navbar-toggler visible-xs-block collapsed" type="button" data-toggle="collapse" data-target="#sidenav">
                 <span class="sr-only">Toggle navigation</span>

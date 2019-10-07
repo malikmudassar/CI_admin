@@ -26,19 +26,19 @@
                                 <li class="sidenav-item <?php if(!empty($menu[$i]['child'])){ echo 'has-subnav';}?>">
                                     <a href="#" aria-haspopup="true">
                                         <span class="sidenav-icon <?php echo $menu[$i]['class']?>"></span>
-                                        <span class="sidenav-label"><?php echo $menu[$i]['name']?></span>
+                                        <span class="sidenav-label"><?php echo $this->lang->line($menu[$i]['name'])?></span>
                                     </a>
                                     <?php
                                     if(count($menu[$i]['child'])>0)
                                     {?>
                                         <ul class="sidenav-subnav collapse">
-                                            <li class="sidenav-subheading"><?php echo $menu[$i]['name']?></li>
+                                            <li class="sidenav-subheading"><?php echo $this->lang->line($menu[$i]['name'])?></li>
                                             <?php
                                             for($j=0;$j<count($menu[$i]['child']);$j++)
                                             {
                                                 if(in_array($menu[$i]['child'][$j]['id'], explode(',', $this->session->userdata['permissions']))){
                                                 ?>
-                                                <li><a href="<?php echo base_url().$menu[$i]['child'][$j]['url']?>"><?php echo $menu[$i]['child'][$j]['name']?></a></li>
+                                                <li><a href="<?php echo base_url().$menu[$i]['child'][$j]['url']?>"><?php echo $this->lang->line($menu[$i]['child'][$j]['name'])?></a></li>
 
                                             <?php
                                                 }
